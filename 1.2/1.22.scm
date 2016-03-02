@@ -21,11 +21,11 @@
 
 
 
-(search-for-primes 1000 1050) ; 1009 1013 1019 6ミリ秒
-(search-for-primes 10000 10100) ; 10007 10009 10037 17ミリ秒
-(search-for-primes 100000 100100) ; 100003 100019 100043 55 ミリ秒
-(search-for-primes 1000000 1000030) ; 395ミリ秒
-(search-for-primes 10000000 10000030) ; 797ミリ秒
+(search-for-primes 1000 1050) ; 1009 1013 1019 6マイクロ秒
+(search-for-primes 10000 10100) ; 10007 10009 10037 17マイクロ秒
+(search-for-primes 100000 100100) ; 100003 100019 100043 55 マイクロ秒
+(search-for-primes 1000000 1000030) ; 395マイクロ秒
+(search-for-primes 10000000 10000030) ; 797マイクロ秒
 
 
 
