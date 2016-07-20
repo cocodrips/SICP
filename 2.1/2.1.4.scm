@@ -255,9 +255,11 @@
 
 (define (make-center-percent i)
     (cons (center i) (percent i)))
-
-(define (print-center-interval i)
-    (print "[ " (car i) "±" (cdr i) "%" " ]\n"))
+;; なぜかintervalをcenter-percent表記にかえる関数つくってしまった
+;;;;中央値とパーセント許容誤差を取り、求める範囲を
+;;;;返すコンストラクタ make-center-percent を定義せよ。
+;; ってあったのに・・・。
+;; いつか直す
 
 (print-interval interval-pp)
 (print-center-interval (make-center-percent interval-pp))
@@ -270,7 +272,18 @@
 ;[ 0.±+inf.0% ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 2.13 いみわからない
+;; 2.13 
+; パーセント許容誤差が小さいという前提のもとで
+;は、二つの区間の積のパーセント許容誤差を因数の許容誤差の積
+;によって近似する簡単な式が存在することを示せ。すべての数値
+;は正であると仮定して問題を単純化してもよい。
+(newline)
+(display "=========Ex 2.13==========")
+(newline)
+
+; 因数: 6 = 2 x 3 <-の2,3のこと（素数じゃなくておｋ）
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ２つの並列抵抗の式
@@ -323,4 +336,52 @@
 
 ;A/A: 1.1333333333333333 ~ 47.058823529411754
 ;A/B: .40601503759398494 ~ 29.629629629629626
-;だからなんだというの・・・？
+
+
+
+; 2.15
+;「変数が繰り返し出てこないように書くほどより厳密な誤差限界を返すようにできる」は真か
+;区間に対して四則演算をすればするほど差は解の区間は大きくなる
+;widthが演算後に小さくなることはない
+
+(newline)
+(display "=========Ex 2.15==========")
+(newline)
+
+(newline)
+(display "========= diff > 1 ==========")
+(newline)
+(define i1 (make-interval 5.0 7.0)) ;width 1
+(define i2 (make-interval -5 -2)) 
+(print (width (add-interval i1 i2)) "\n")
+(print (width (mul-interval i1 i2)) "\n")
+(print (width (sub-interval i1 i2)) "\n")
+(print (width (div-interval i1 i2)) "\n")
+
+
+(newline)
+(display "========= diff < 1 ==========")
+(newline)
+
+(define i1 (make-interval 1 5)) ;width2
+(define i2 (make-interval 1 1.2)) 
+(print (width (add-interval i1 i2)) "\n")
+(print (width (mul-interval i1 i2)) "\n")
+(print (width (sub-interval i1 i2)) "\n")
+(print (width (div-interval i1 i2)) "\n")
+
+;========= diff > 1 ==========
+;2.5
+;12.5
+;2.5
+;1.25
+
+;========= diff < 1 ==========
+;2.1
+;2.5
+;2.1
+;2.0833333333333335
+
+
+;2.16
+;群環体の体あたりの性質を満たしてなさそう（テキトウ）
