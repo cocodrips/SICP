@@ -255,6 +255,10 @@
 
 (define (make-center-percent i)
     (cons (center i) (percent i)))
+
+(define (print-center-interval i)
+    (print "[ " (car i) "±" (cdr i) "%" " ]\n"))
+
 ;; なぜかintervalをcenter-percent表記にかえる関数つくってしまった
 ;;;;中央値とパーセント許容誤差を取り、求める範囲を
 ;;;;返すコンストラクタ make-center-percent を定義せよ。
@@ -317,10 +321,10 @@
 (print-center-interval (make-center-percent B))
 
 (print "par1: ")
-(print-interval (par1 A B))
+(print-center-interval (make-center-percent (par1 A B)))
 
 (print "par2: ")
-(print-interval (par2 A B))
+(print-center-interval (make-center-percent (par2 A B)))
 
 ;par1: 3.6774193548387095 ~ 8.4
 ;par2: 4.5600000000000005 ~ 6.774193548387097
