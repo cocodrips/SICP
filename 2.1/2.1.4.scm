@@ -322,12 +322,14 @@
 
 (print "par1: ")
 (print-center-interval (make-center-percent (par1 A B)))
+;par1: [ 6.038709677419355±39.1025641025641% ]
+
 
 (print "par2: ")
 (print-center-interval (make-center-percent (par2 A B)))
+;par2: [ 5.667096774193549±19.535519125683052% ]
 
-;par1: 3.6774193548387095 ~ 8.4
-;par2: 4.5600000000000005 ~ 6.774193548387097
+
 
 (print "A/A: ")
 (define AA (div-interval A A))
