@@ -77,11 +77,12 @@
     (define (itr src dist)
         (if (null? src)
             dist
-            (itr (cdr src) (append (list (car src)) dist)))) ;; car でつなぐとlist表記にならなかったので・・・。効率悪そう。
+            (itr (cdr src) (cons (car src) dist)))) ;; car でつなぐとlist表記にならなかったので・・・。効率悪そう。
     (itr items (list)))
 
 (display (reverse squares))
 ;(25 16 9 4 1)
+(newline)
 
 
 (display "=====Ex 2.19=====")
@@ -126,3 +127,147 @@
 (display (same-parity 2 3 4 5 6 10))
 (newline)
 ;(2 4 6 10)
+
+
+;; Filter実装すればいいっぽい！
+(define (filter l f)
+    (cond 
+        ((null? l) (list))
+        ((f (car l)) (cons (car l) (filter (cdr l) f)))
+    (else (filter (cdr l) f))))
+
+(define (same-parity . l)
+    (filter l (lambda (x) (= (remainder x 2) (remainder (car l) 2)))))
+
+
+(display "=====Ex 2.20 filter=====")
+(newline)
+
+(display (same-parity 1 2 3 4 5)) 
+(newline)
+;(1 3 5)
+
+(display (same-parity 2 3 4 5 6 10))
+(newline)
+;(2 4 6 10)
+
+(display "=====Ex 2.20 reverse=====")
+(newline)
+
+;; reverse後からすることで、スタックが消費しないようにできる？
+(define (filter l f)
+    (define (filter-itr l f dist)
+        (cond 
+            ((null? l) dist)
+            ((f (car l)) (filter-itr (cdr l) f (cons (car l) dist)))
+        (else (filter-itr (cdr l) f dist))))
+    (reverse (filter-itr l f (list))))
+
+(display (same-parity 1 2 3 4 5)) 
+(newline)
+;(1 3 5)
+
+(display (same-parity 2 3 4 5 6 10))
+(newline)
+;(2 4 6 10)
+
+
+(define (map proc items)
+    (if (null? items)
+        (list)
+        (cons (proc (car items)) (map proc (cdr items)))))
+
+(display (map abs (list -10 2.5 -11.6 17)))
+(newline)
+;(10 2.5 11.6 17)
+
+(display (map (lambda (x) (* x x)) (list 1 2 3 4)))
+(newline)
+;(10 2.5 11.6 17)
+
+
+(display "==========Ex 2.21===========")
+(newline)
+
+(define (square-list items)
+    (if (null? items)
+        (list)
+        (cons (* (car items) (car items)) (square-list (cdr items)))))
+
+(display (square-list (list 1 2 3 4)))
+(newline)
+;(1 4 9 16)
+
+
+(define (square-list items)
+    (map (lambda (x) (* x x)) items))
+
+(display (square-list (list 5 6 7 8)))
+(newline)
+;(25 36 49 64)
+
+(display "==========Ex 2.22===========")
+(newline)
+
+(define (square x) (* x x))
+
+(define (square-list items)
+    (define (iter things answer)
+        (if (null? things)
+            answer
+            (iter (cdr things)
+                    (cons (square (car things))
+                    answer))))
+    (iter items (list)))
+(display (square-list (list 5 6 7 8)))
+(newline)
+;(64 49 36 25)
+
+(define (square-list items)
+    (define (iter things answer)
+        (if (null? things)
+            answer
+            (iter (cdr things)
+                (cons answer
+                (square (car things))))))
+    (iter items (list)))
+(display (square-list (list 5 6 7 8)))
+(newline)
+;((((() . 25) . 36) . 49) . 64)
+
+; 前回も話した
+
+(display "==========Ex 2.23===========")
+(newline)
+
+
+(define (for-each-orig f items)
+    (cond 
+        ((null? items) #t)
+        (else 
+            (f (car items))
+            (for-each-orig f (cdr items)))))
+        
+
+;(define (for-each-orig f items)
+;   (if
+;       (null? items) 
+;       #t
+;       ((f (car items))
+;        (for-each-orig f (cdr items)))))
+     
+; *** ERROR: invalid application: (#<undef> #t) なぜ～
+
+(for-each-orig 
+    (lambda (x)
+            (newline)
+            (display x))
+    (list 57 321 88))
+
+;57
+;321
+;88
+
+
+
+        
