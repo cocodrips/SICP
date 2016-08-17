@@ -257,6 +257,8 @@
 ;        (for-each-orig f (cdr items)))))
      
 ; *** ERROR: invalid application: (#<undef> #t) なぜ～
+; -> if で手続きを ２つする処理はかけない？
+; -> beginやletでgroupingしてあげるのがいいかも
 
 (for-each-orig 
     (lambda (x)
