@@ -82,7 +82,7 @@
         (newline)
         (cond 
             ((null? src) dist)
-            ((list? (car src)) (itr (cdr src) (cons (deep-reverse (car src)) dist)))
+            ((pair? (car src)) (itr (cdr src) (cons (deep-reverse (car src)) dist)))
         (else   
             (itr (cdr src) (cons (car src) dist)))))
     (itr items (list)))
@@ -237,15 +237,107 @@
 ;((3 5) 2):#f
 ;((3 5) (2 6)):#t
 
-(display "d.")
-(newline)
+;(display "d.")
+;(newline)
 
-(define (make-mobile left right) (cons left right))
-(define (make-branch length structure)
-    (cons length structure))
+;(define (make-mobile left right) (cons left right))
+;(define (make-branch length structure)
+;    (cons length structure))
 
-(define m (make-mobile 1 (make-mobile 2 3)))
-(display m)
-(newline)
+;(define m (make-mobile 1 (make-mobile 2 3)))
+;(display m)
+;(newline)
 
 ;; 途中
+
+
+
+;(display (pair? (cons 1 2))) (newline) ;#t
+;(display (list? (cons 1 2))) (newline) ;#f
+
+
+
+
+(display "==========Scele tree===========")
+(newline)
+(define (scale-tree tree factor)
+    (cond 
+        ((null? tree) ())
+        ((not (pair? tree)) (* tree factor))
+        (else (cons (scale-tree (car tree) factor)
+                    (scale-tree (cdr tree) factor))))
+)
+
+(display (scale-tree (list 1 (list 2) 3) 10))
+(newline)
+(define (scale-tree tree factor)
+    (map (lambda (sub-tree)
+        (if (pair? sub-tree)
+            (scale-tree sub-tree factor)
+            (* sub-tree factor)))
+    tree)
+)
+
+
+
+;; ex 2.30
+(display "==========Ex 2.30===========")
+(newline)
+
+;; 普通に
+(define (square-tree tree)
+    (cond 
+        ((null? tree) ())
+        ((not (pair? tree)) (* tree tree))
+        (else (cons (square-tree (car tree)) (square-tree (cdr tree)))))
+)
+
+(display (square-tree (list 1 (list 2) 3)))
+(newline)
+;(1 (4) 9)
+
+;; map
+(define (square-tree tree)
+    (map (lambda (sub-tree)
+        (if (pair? sub-tree)
+            (square-tree sub-tree)
+            (* sub-tree sub-tree)))
+    tree)
+)
+(display (square-tree (list 1 (list 2) 3)))
+(newline)
+;(1 (4) 9)
+
+
+
+(display "==========Ex 2.31===========")
+(newline)
+(define (tree-map tree f)
+    (map (lambda (sub-tree)
+        (if (pair? sub-tree)
+            (tree-map sub-tree f)
+            (f sub-tree)))
+    tree)
+)
+(display (tree-map (list 1 (list 5) 7) (lambda (x) (* x x))))
+(newline)
+;(1 (25) 49)
+
+
+(display "==========Ex 2.32===========")
+(newline)
+(define (subsets s)
+    (if (null? s)
+        (list ())
+        (let 
+            ((rest (subsets (cdr s))))
+            (append rest (map (lambda (x) (cons x (car s))) rest)))))
+(display (subsets (list 1 4 7)))
+(newline)
+
+
+;(1) -> () (1)
+;(1 2 3)         : ()
+;        (2 3)   : () (1)
+;        (3)     : () (1) (2) (1 2)
+;        ()      : () (1) (2) (1 2) (3) (1 3) (2 3) (1 2 3)
