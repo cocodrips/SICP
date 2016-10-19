@@ -1,0 +1,939 @@
+gosh> test
+gosh> *** ERROR: wrong number of arguments for #<closure test> (required 2, got 1)
+Stack Trace:
+_______________________________________
+  0  (test 0)
+        At line 7 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> test
+gosh> *** ERROR: wrong number of arguments for #<closure test> (required 2, got 1)
+Stack Trace:
+_______________________________________
+  0  (test 0)
+        At line 15 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: wrong number of arguments for #<closure test> (required 2, got 1)
+Stack Trace:
+_______________________________________
+  0  (test 0)
+        At line 17 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: wrong number of arguments for #<closure test> (required 2, got 1)
+Stack Trace:
+_______________________________________
+  0  (test 0)
+        At line 19 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: wrong number of arguments for #<closure test> (required 2, got 1)
+Stack Trace:
+_______________________________________
+  0  (test 0)
+        At line 21 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> test
+gosh> 1.0
+gosh> tt
+gosh> *** ERROR: unbound variable: t
+Stack Trace:
+_______________________________________
+  0  t
+
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: unbound variable: compile
+Stack Trace:
+_______________________________________
+  0  (compile '(begin (define (tt i) (if (= i 0) (test i) (debug-print 
+        At line 38 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> tt
+gosh> #?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?="(standard input)":46:(tt (- i 1))
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+1.0
+gosh> test
+gosh> tt
+gosh> #?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+#?="(standard input)":60:(tt (- i 1))
+0,0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+#?-    1.0
+1.0
+gosh> *** ERROR: Compile Error: syntax-error: malformed if: (if (= i 0) (test i) (debug-print (test i)) (tt (- i 1)))
+"(standard input)":64:(define (tt i) (if (= i 0) (test i)  ...
+
+Stack Trace:
+_______________________________________
+  0  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> 3,1
+4
+gosh> 0,1
+1
+gosh> 0,2
+1.0
+gosh> 1,0
+1.0
+gosh> test
+gosh> test
+gosh> 1,0
+1.0
+gosh> 0,2
+2
+gosh> 1,1
+1.0
+gosh> 1,2
+3
+gosh> *** ERROR: unbound variable: cont-frac
+Stack Trace:
+_______________________________________
+  0  (cont-frac (lambda (i) 1.0) (lambda (i) (let ((j (quotient i 3)) (
+        At line 99 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: unbound variable: cont-frac
+Stack Trace:
+_______________________________________
+  0  (cont-frac (lambda (i) 1.0) (lambda (i) (let ((j (quotient i 3)) (
+        At line 107 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: unbound variable: cont-frac
+Stack Trace:
+_______________________________________
+  0  (cont-frac (lambda (i) 1.0) (lambda (i) (let ((j (quotient i 3)) (
+        At line 116 of "(standard input)"
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> cont-frac
+gosh> #?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.27906976744186046
+#?-    0.7818181818181817
+#?-    0.5612244897959184
+#?-    0.2192393736017897
+#?-    0.8201834862385321
+#?-    0.5493951612903225
+0.5493951612903225
+gosh> #?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.27906976744186046
+#?-    0.7818181818181817
+#?-    0.5612244897959184
+#?-    0.2192393736017897
+#?-    0.8201834862385321
+#?-    0.5493951612903225
+#?-    0.18019981834695734
+#?-    0.8473141449899954
+#?-    0.5413264455924013
+#?-    0.15287419276770817
+#?-    0.8673973329208604
+#?-    0.5355046740030766
+#?-    0.13270511309613073
+#?-    0.8828423112407472
+#?-    0.5311119226660168
+#?-    0.1172180143766646
+#?-    0.8950804472643017
+#?-    0.5276820841266021
+#?-    0.10495732237602987
+#?-    0.905012329208936
+#?-    0.5249309858352749
+#?-    0.09501249949722483
+#?-    0.9132315845336471
+#?-    0.5226758789076501
+#?-    0.086785396943301
+#?-    0.920144862833643
+0.920144862833643
+gosh> #?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+#?-    0.11715823172808391
+#?-    0.8951283458325712
+#?-    0.5276687471848659
+#?-    0.09498779112587517
+#?-    0.9132521915808687
+#?-    0.5226702493275217
+#?-    0.07985517306532133
+#?-    0.9260501083319893
+#?-    0.5191972917392199
+#?-    0.06887433099135279
+#?-    0.9355636776051365
+#?-    0.5166453636065826
+#?-    0.060544982227652526
+#?-    0.9429114434161209
+#?-    0.5146914973344084
+#?-    0.05401116190048166
+#?-    0.9487565560471917
+#?-    0.513147728430674
+#?-    0.04874922236405614
+#?-    0.953516797605659
+0.953516797605659
+gosh> #?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+#?-    0.11715823172808391
+#?-    0.8951283458325712
+#?-    0.5276687471848659
+#?-    0.09498779112587517
+#?-    0.9132521915808687
+#?-    0.5226702493275217
+#?-    0.07985517306532133
+#?-    0.9260501083319893
+#?-    0.5191972917392199
+#?-    0.06887433099135279
+#?-    0.9355636776051365
+#?-    0.5166453636065826
+#?-    0.060544982227652526
+#?-    0.9429114434161209
+#?-    0.5146914973344084
+#?-    0.05401116190048166
+#?-    0.9487565560471917
+#?-    0.513147728430674
+#?-    0.04874922236405614
+#?-    0.953516797605659
+0.953516797605659
+gosh> #?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":128:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+#?-    0.11715823172808391
+#?-    0.8951283458325712
+#?-    0.5276687471848659
+#?-    0.09498779112587517
+#?-    0.9132521915808687
+#?-    0.5226702493275217
+#?-    0.07985517306532133
+#?-    0.9260501083319893
+#?-    0.5191972917392199
+#?-    0.06887433099135279
+#?-    0.9355636776051365
+#?-    0.5166453636065826
+#?-    0.060544982227652526
+#?-    0.9429114434161209
+#?-    0.5146914973344084
+#?-    0.05401116190048166
+#?-    0.9487565560471917
+#?-    0.513147728430674
+#?-    0.04874922236405614
+#?-    0.953516797605659
+0.953516797605659
+gosh> cont-frac
+gosh> #?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+0.5354651162790698
+gosh> #?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商3
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商3
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商1
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商1
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商1
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商0
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商0
+余り0商0
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+0.5354651162790698
+gosh> #?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+*** ERROR: invalid application: (10 10 3)
+Stack Trace:
+_______________________________________
+  0  (i i j)
+        At line 203 of "(standard input)"
+  1  (print "余り" k "商" j "=" (i i j))
+        At line 203 of "(standard input)"
+  2  (d k)
+        At line 178 of "(standard input)"
+  3  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> #?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商3=7
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商3=6
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商2=6
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商2=5
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商2=4
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商1=4
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商1=3
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商1=2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商0=2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商0=1
+余り0商0=0
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+0.5354651162790698
+gosh> #?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商3=7
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商3=6
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商2=6
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商2=5
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商2=4
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商1=4
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商1=3
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商1=2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商0=2
+#?="(standard input)":178:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商0=1
+余り0商0=0
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+#?-    0.5833333333333333
+#?-    0.2181818181818182
+#?-    0.8208955223880596
+#?-    0.5491803278688525
+#?-    0.15269086357947434
+#?-    0.8675352877307274
+#?-    0.5354651162790698
+0.5354651162790698
+gosh> cont-frac
+gosh> #?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商3=7
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商3=6
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商2=6
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商2=5
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商2=4
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商1=4
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り1商1=3
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り0商1=2
+#?="(standard input)":232:(/ (n k) (+ (d k) (cont-frac n d (- k 1))))
+余り2商0=2
+余り1商0=1
+#?-    0.3333333333333333
+#?-    0.75
+#?-    0.5714285714285714
+#?-    0.21875
+#?-    0.8205128205128205
+#?-    0.5492957746478874
+#?-    0.15268817204301077
+#?-    0.8675373134328357
+#?-    0.5354645354645355
+0.5354645354645355
+gosh> cont-frac
+gosh> #?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り1商0=1
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り2商0=2
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り0商1=2
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り1商1=3
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り2商1=4
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り0商2=4
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り1商2=5
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り2商2=6
+#?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り0商3=6
+余り1商3=7
+#?-    0.5
+#?-    0.15384615384615385
+#?-    0.8666666666666667
+#?-    0.5357142857142857
+#?-    0.2204724409448819
+#?-    0.8193548387096774
+#?-    0.549645390070922
+#?-    0.39221140472878996
+#?-    0.7182817182817183
+0.7182817182817183
+gosh> #?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+*** ERROR: unbound variable: k
+Stack Trace:
+_______________________________________
+  0  k
+
+  1  (print "余り" k "商" j "=" (- i j))
+        At line 265 of "(standard input)"
+  2  (d i)
+        At line 248 of "(standard input)"
+  3  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> #?="(standard input)":248:(/ (n i) (+ (d i) (iter (+ i 1))))
+*** ERROR: unbound variable: j
+Stack Trace:
+_______________________________________
+  0  j
+
+  1  (print "余り" mod " 商" div "=>" (- i j))
+        At line 275 of "(standard input)"
+  2  (d i)
+        At line 248 of "(standard input)"
+  3  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> cont-frac
+gosh> #?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り1 商0=>1
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り2 商0=>2
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り0 商1=>2
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り1 商1=>3
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り2 商1=>4
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り0 商2=>4
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り1 商2=>5
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り2 商2=>6
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+余り0 商3=>6
+余り1 商3=>7
+#?-    0.5
+#?-    0.15384615384615385
+#?-    0.8666666666666667
+#?-    0.5357142857142857
+#?-    0.2204724409448819
+#?-    0.8193548387096774
+#?-    0.549645390070922
+#?-    0.39221140472878996
+#?-    0.7182817182817183
+0.7182817182817183
+gosh> *** ERROR: Compile Error: syntax-error: malformed let: (let (ans (cont-frac (lambda (i) 1.0) (lambda (i) (let ((div (quotient i 3)) (mod (modulo i 3))) (if (= mod 2) (- i div) 1.0))) i)) (print i "=>" ans))
+"(standard input)":298:(define (n-cont-frac n) (define (n-i ...
+
+Stack Trace:
+_______________________________________
+  0  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: Compile Error: syntax-error: malformed let: (let (ans (cont-frac (lambda (i) 1.0) (lambda (i) (let ((div (quotient i 3)) (mod (modulo i 3))) (if (= mod 2) (- i div) 1.0))) i)) (display ans))
+"(standard input)":312:(define (n-cont-frac n) (define (n-i ...
+
+Stack Trace:
+_______________________________________
+  0  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: Compile Error: syntax-error: malformed let: (let (ans (cont-frac (lambda (i) 1.0) (lambda (i) (let ((div (quotient i 3)) (mod (modulo i 3))) (if (= mod 2) (- i div) 1.0))) i)) (display ans))
+"(standard input)":326:(define (n-cont-frac n) (define (n-i ...
+
+Stack Trace:
+_______________________________________
+  0  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> *** ERROR: Compile Error: syntax-error: malformed let: (let (ans (cont-frac (lambda (i) 1.0) (lambda (i) (let ((div (quotient i 3)) (mod (modulo i 3))) (if (= mod 2) (- i div) 1.0))) i)) (display ans))
+"(standard input)":341:(define (n-cont-frac n) (define (n-i ...
+
+Stack Trace:
+_______________________________________
+  0  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> n-cont-frac
+gosh> 1.0#<undef>
+gosh> n-cont-frac
+gosh> 1
+#<undef>
+gosh> n-cont-frac
+gosh> *** ERROR: unbound variable: i
+Stack Trace:
+_______________________________________
+  0  i
+
+  1  (cont-frac (lambda (i) 1.0) (lambda (i) (let ((div (quotient i 3))
+        At line 397 of "(standard input)"
+  2  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> n-cont-frac
+gosh> n-cont-frac
+gosh> 1
+#<undef>
+gosh> n-cont-frac
+gosh> 1
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.6666666666666666
+2
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.3333333333333333
+#?-    0.75
+3
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.5
+#?-    0.4
+#?-    0.7142857142857143
+4
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.8
+#?-    0.5555555555555556
+#?-    0.391304347826087
+#?-    0.71875
+5
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.2
+#?-    0.8333333333333334
+#?-    0.5454545454545454
+#?-    0.39285714285714285
+#?-    0.717948717948718
+6
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.5
+#?-    0.2222222222222222
+#?-    0.8181818181818181
+#?-    0.55
+#?-    0.3921568627450981
+#?-    0.7183098591549296
+7
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.8571428571428571
+#?-    0.5384615384615384
+#?-    0.22033898305084745
+#?-    0.8194444444444444
+#?-    0.549618320610687
+#?-    0.39221556886227543
+#?-    0.7182795698924731
+8
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?="(standard input)":285:(/ (n i) (+ (d i) (iter (+ i 1))))
+#?-    0.14285714285714285
+#?-    0.875
+#?-    0.5333333333333333
+#?-    0.22058823529411764
+#?-    0.8192771084337349
+#?-    0.5496688741721855
+#?-    0.3922077922077922
+#?-    0.7182835820895522
+9
+0
+gosh> cont-frac
+gosh> n-cont-frac
+gosh> 1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+gosh> n-cont-frac
+gosh> 1
+2
+3
+4
+5
+6
+7
+8
+9
+"end"
+gosh> n-cont-frac
+gosh> "end"
+gosh> n-cont-frac
+gosh> 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+"end"
+gosh> n-cont-frac
+gosh> 1=>1.0
+2=>0.6666666666666666
+3=>0.75
+4=>0.7142857142857143
+5=>0.71875
+6=>0.717948717948718
+7=>0.7183098591549296
+8=>0.7182795698924731
+9=>0.7182835820895522
+10=>0.7182817182817183
+"end"
+gosh> n-cont-frac
+gosh> 1=>3.0
+2=>2.6666666666666665
+3=>2.75
+4=>2.7142857142857144
+5=>2.71875
+6=>2.717948717948718
+7=>2.7183098591549295
+8=>2.718279569892473
+9=>2.718283582089552
+10=>2.7182817182817183
+"end"
+gosh> 1.557407724654902
+gosh> tan
+gosh> n
+gosh> tan
+gosh> n
+gosh> -565649425/363199319
+gosh> -1.557407724654902
+gosh> 4.370079726525255
+gosh> 4.370079726525255
+gosh> cont-frac
+gosh> n
+gosh> tan
+gosh> -0.7853981633974483
+gosh> inc
+gosh> double
+gosh> *** ERROR: operation + is not defined between 1 and #<closure inc>
+Stack Trace:
+_______________________________________
+  0  (+ x 1)
+        At line 627 of "(standard input)"
+  1  (double inc)
+        At line 631 of "(standard input)"
+  2  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> double
+gosh> 4
+gosh> 3
+gosh> 21
+gosh> 17
+gosh> 21
+gosh> 21
+gosh> 21
+gosh> dx
+gosh> deriv
+gosh> cube
+gosh> newton-transform
+gosh> newtons-method
+gosh> fixed-point
+gosh> square
+gosh> sqrt
+gosh> *** ERROR: unbound variable: z
+Stack Trace:
+_______________________________________
+  0  z
+
+  1  ((deriv g) z)
+        At line 655 of "(standard input)"
+  2  (f guess)
+        At line 665 of "(standard input)"
+  3  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> newton-transform
+gosh> newton-transform
+gosh> newton-transform
+gosh> sqrt
+gosh> *** ERROR: unbound variable: tolerance
+Stack Trace:
+_______________________________________
+  0  tolerance
+
+  1  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> tolerance
+gosh> 1.1832159566199498
+gosh> 1.4142135623822438
+gosh> cube
+gosh> *** ERROR: unbound variable: cubic
+Stack Trace:
+_______________________________________
+  0  (cubic 3 3 1)
+        At line 696 of "(standard input)"
+  1  (cubic 3 3 1)
+        At line 696 of "(standard input)"
+  2  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> cubic
+gosh> *** ERROR: unbound variable: x
+gStack Trace:
+_______________________________________
+  0  x
+
+  1  (cube x)
+        At line 699 of "(standard input)"
+  2  (cubic 3 3 1)
+        At line 704 of "(standard input)"
+  3  (eval expr env)
+        At line 179 of "/usr/local/Cellar/gauche/0.9.4/share/gauche-0.9/0.9.4/lib/gauche/interactive.scm"
+gosh> cubic
+gosh> cubic
+gosh> -0.9999755158323895
+gosh> 1.0
+gosh> 
