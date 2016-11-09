@@ -483,10 +483,10 @@
 
 ;(display (for-each (lambda (n) (print (list n (length (queens n))))) (enumerate-interval 1 5))) ;; 時間かかりすぎる
 
-;; 2016/10/10くらいの
-;;
+
+;; 2016/10/19 #24
 (newline)
-(print "===new 8 queen===")
+(print "===Ex 2.42 もういっかい===")
 (define (queens board-size)
     (define (queen-cols k)
         (if (= k 0)
@@ -571,15 +571,39 @@
 )
 (test-slash?)
 
+;--test (same-col? 3 (list 1 3 3)) #t
+;#t
+;--test  (same-col? 3 (list 1 3 5)) #f
+;#f
+;--test (slash? 3 (list 3 2 1)) #t
+;#t
+;--test (slash? 3 (list 5 3 1)) #f
+;#f
+;--test (slash? 2 (list 1 2)) #t
+;#t
+;--test (slash? 2 (list 1 3)) #f
+;#f
+;--test (slash? 3 (list 2 4 3)) #t
+;#t
+
 (define (test-nqueen?)
     (print "1-queens: " (length (queens 1)))
     (print "4-queens: " (length (queens 4)))
     (print "8-queens: " (length (queens 8)))
 )
 (test-nqueen?)
+;1-queens: 1
+;4-queens: 2
+;8-queens: 92
+(time (length (queens 8)))
+(time (length (queens 9)))
 
 
 
+(display "======Ex.2.43======")
+(newline)
+
+(print "2.42では n行目の段階で満たさない物は先に選択肢から除外している。2.43の提案では、すべての選択肢を作って(O(N^N))から")
 
 
 
