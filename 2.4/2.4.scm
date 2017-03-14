@@ -48,3 +48,50 @@
 (cons (sqrt (+ (square x) (square y)))
 (atan y x)))
 (define (make-from-mag-ang r a) (cons r a))
+
+
+(print "===2.4.2===")
+; タグ付きデータ
+
+; Type tag とContents手続き
+(define (attach-tag type-tag contents)
+    (cons type-tag contents))
+
+(define (type-tag datum)
+    (if (pair? datum)
+        (car datum)
+        (error "Bad tagged datum: TYPE-TAG" datum)))
+
+(define (contents datum)
+    (if (pair? datum)
+        (cdr datum)
+        (error "Bad tagged datum: CONTENTS" datum))
+
+
+; 直行形式と極形式を識別するタグ
+(define (rectangular? z)
+    (eq? (type-tag z) 'rectangular))
+
+(define (polar? z) 
+    (eq? (type-tag z) 'polar))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
