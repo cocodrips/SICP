@@ -1,9 +1,0 @@
-[user]	
-	name = cocodrips
-        email = cocodrips@gmail.com
-
-[alias]
-        co = checkout
-	        st = status
-		        cm = commit -m
-			        graph = log --graph --decorate
