@@ -76,11 +76,70 @@
     (eq? (type-tag z) 'polar))
 
 
+; 直行形式
+(define (real-part-rectangular z) (car z))
+(define (imag-part-rectangular z) (cdr z))
+(define (magnitude-rectangular z)
+    (sqrt (+ 
+        (square (real-part-rectangular z))
+        (square (imag-part-rectangular z)))))
+
+(define (angle-rectangular z)
+    (atan 
+        (imag-part-rectangular z)
+        (real-part-rectangular z)))
+
+(define (make-from-real-imag-rectangular x y)
+    (attach-tag 'rectangular (cons x y)))
+(define (make-from-mag-ang-rectangular r a)
+    (attach-tag 'rectangular (cons (* r (cos a)) (* r (sin a)))))
+
+; 極形式
+(define (real-part-polar z)
+    (* (magnitude-polar z) (cos (angle-polar z))))
+(define (imag-part-polar z)
+    (* (magnitude-polar z) (sin (angle-polar z))))
+(define (magnitude-polar z) (car z))
+(define (angle-polar z) (cdr z))
+(define (make-from-real-imag-polar x y)
+    (attach-tag 'polar
+        (cons (sqrt (+ (square x) (square y)))
+        (atan y x))))
+(define (make-from-mag-ang-polar r a)
+    (attach-tag 'polar (cons r a)))
+
+(define (make-from-real-imag x y)
+    (make-from-real-imag-rectangular x y))
 
 
+(print "===2.4.3===")
+;このままだと、種類が増える度にそれに対応する関数分だけ関数&&名前が増える
 
 
-
+(define (install-rectangular-package)
+    ;; 内部手続き
+    (define (real-part z) (car z))
+    (define (imag-part z) (cdr z))
+    (define (make-from-real-imag x y) (cons x y))
+    (define (magnitude z)
+        (sqrt (+ 
+            (square (real-part z))
+            (square (imag-part z)))))
+    (define (angle z)
+        (atan (imag-part z) (real-part z)))
+    (define (make-from-mag-ang r a)
+        (cons (* r (cos a)) (* r (sin a))))
+    ;; システムのほかの部分とのインターフェイス
+    (define (tag x) (attach-tag 'rectangular x))
+    (put 'real-part '(rectangular) real-part)
+    (put 'imag-part '(rectangular) imag-part)
+    (put 'magnitude '(rectangular) magnitude)
+    (put 'angle '(rectangular) angle)
+    (put 'make-from-real-imag 'rectangular
+    (lambda (x y) (tag (make-from-real-imag x y))))
+    (put 'make-from-mag-ang 'rectangular
+    (lambda (r a) (tag (make-from-mag-ang r a))))
+'done)
 
 
 
