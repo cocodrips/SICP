@@ -52,7 +52,11 @@
         (lambda (x y) (tag (* x y))))
     (put 'div '(scheme-number scheme-number)
         (lambda (x y) (tag (/ x y))))
+    ; Ex 2.79
     (put 'epq? '(scheme-number scheme-number) =)
+    ; Ex 2.80
+    (put '=zero? '(scheme-number)
+        (lambda (x) (= x 0)))
     (put 'make 'scheme-number (lambda (x) (tag x)))
 'done)
 
@@ -98,11 +102,16 @@
         (lambda (x y) (tag (mul-rat x y))))
     (put 'div '(rational rational)
         (lambda (x y) (tag (div-rat x y))))
-    (put 'epq? '(rational rational)
+
+    ; Ex 2.79
+    (put 'epq? '(rational rational) 
         (lambda (x y) 
             (= 
                 (* (numer x) (denom y))
                 (* (denom x) (numer y)))))
+    ; Ex 2.80
+    (put '=zero? '(rational)
+        (lambda (x) (= (numer x) 0)))
     (put 'make 'rational
         (lambda (n d) (tag (make-rat n d))))
 'done)
@@ -204,13 +213,20 @@
     (put 'imag-part '(complex) imag-part)
     (put 'magnitude '(complex) magnitude)
     (put 'angle '(complex) angle)
-
-    (put 'epq? '(complex complex) ; Ex.2.79
+    
+    ; Ex.2.79
+    (put 'epq? '(complex complex) 
         (lambda (z1 z2) 
             (and 
                 (= (real-part z1) (real-part z2))
                 (= (imag-part z1) (imag-part z2))
         )))
+
+    ; Ex 2.80
+    (put '=zero? '(complex)
+        (lambda (x) (= (real-part x) 0)))
+
+
     (put 'make-from-real-imag 'complex
         (lambda (x y) (tag (make-from-real-imag x y))))
     (put 'make-from-mag-ang 'complex
@@ -345,9 +361,20 @@
 
 
 (print "===Ex.2.80===")
-; =zero?
+(define (=zero? x) (apply-generic '=zero? x))
+(define num0 (make-scheme-number 0))
+(define rat0 (make-rational 0 5))
+(define com0 (make-complex-from-mag-ang 0 60))
 
+(print "zero")
+(print (=zero? num0))
+(print (=zero? rat0))
+(print (=zero? com0))
 
+(print "not zero")
+(print (=zero? num))
+(print (=zero? rat))
+(print (=zero? com))
 
 
 
