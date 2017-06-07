@@ -3,24 +3,7 @@
 ;(load "./get-put.scm")
 ;(load "./tag.scm")
 ;; 2.5.1
-
-(define registory '())
-
-(define (put op type item)
-    (let ((key (cons op type)))
-        (let ((pair (cons key item)))
-            (set! registory (cons pair registory)))))
-
-(define (get op type)
-    (define (iter key rest)
-        (cond
-            ((null? rest)
-                (error "no such object: GET:" key))
-            ((equal? key (car (car rest)))
-                (cdr (car rest)))
-            (else
-                (iter key (cdr rest)))))
-    (iter (cons op type) registory))
+(load "./../get-put.scm")
 
 ;; 演算手続き from 2.4
 (define (apply-generic op . args)
@@ -147,13 +130,13 @@
 (put-coercion 'scheme-number 'complex scheme-number->complex)
 
 (define (apply-generic op . args)
-    (print "@@@@@@@@@@@@use apply-generic")
     (let ((type-tags (map type-tag args)))
         (let ((proc (get op type-tags)))
+            ;(print "type: " type-tags)
             (if proc
                 (apply proc (map contents args))
-
-                #?=(if (= (length args) 2)
+                ;; procがなくて　lengthが2のとき 
+                (if (= (length args) 2)
                     (let 
                         (
                             (type1 (car type-tags))
@@ -163,9 +146,10 @@
                         )
                         (let 
                             (
-                                #?=(t1->t2 (get-coercion type1 type2))
-                                #?=(t2->t1 (get-coercion type2 type1))
+                                (t1->t2 (get-coercion type1 type2))
+                                (t2->t1 (get-coercion type2 type1))
                             )
+
                             (cond 
                                 (t1->t2 (apply-generic op (t1->t2 a1) a2))
                                 (t2->t1 (apply-generic op a1 (t2->t1 a2)))
@@ -198,6 +182,10 @@
 
 (define (exp x y) (apply-generic 'exp x y))
 
+;※使っていたget/putの実装が今回の問題を想定していなかったので、
+;実装を修正
+
+
 (print "---a")
 (define s1 (make-scheme-number 5))
 (define s2 (make-scheme-number 2))
@@ -207,27 +195,35 @@
 (define c1 (make-complex-from-real-imag 5 1))
 (define c2 (make-complex-from-real-imag 2 1))
 ;(print (exp c1 c2)) 
-;*** ERROR: no such object: GET: (exp complex complex)
-; うーーーん
+;(complex complex)に揃ったあと無限ループ。
 
 
 (print "---b")
 (define r1 (make-rational 2 3))
-(print (add s1 c1))
-;*** ERROR: no such object: GET: (add scheme-number complex)
-; それはそう。
-; なぜうごかない？？？
+(print (add s1 c1)) ;○ できる
 
+; 
+
+(print "---c")
 
 
 (define (apply-generic op . args)
-    (print "@@@@@@@@@@@@use apply-generic")
+    (define (all el l)
+        (cond
+            ((null? l) #t)
+            ((not (pair? l)) #f)
+            ((eq? el (car l)) (all el (cdr l)))
+        (else #f)))
+
     (let ((type-tags (map type-tag args)))
         (let ((proc (get op type-tags)))
-            (if proc
-                (apply proc (map contents args))
-
-                #?=(if (= (length args) 2)
+            (print "type: " type-tags (all (car type-tags) type-tags))
+            (cond 
+                (proc
+                    (apply proc (map contents args)))
+                ((all (car type-tags) type-tags)
+                    (error "No method for these types" (list op type-tags)))
+                (if (= (length args) 2)
                     (let 
                         (
                             (type1 (car type-tags))
@@ -237,18 +233,24 @@
                         )
                         (let 
                             (
-                                #?=(t1->t2 (get-coercion type1 type2))
-                                #?=(t2->t1 (get-coercion type2 type1))
+                                (t1->t2 (get-coercion type1 type2))
+                                (t2->t1 (get-coercion type2 type1))
                             )
+
                             (cond 
                                 (t1->t2 (apply-generic op (t1->t2 a1) a2))
                                 (t2->t1 (apply-generic op a1 (t2->t1 a2)))
                             (else (error "No method for these types"
-                                (list op type-tags ))))))
-                            (error "No method for these types"
-                                        (list op type-tags )))))))
+                                (list op type-tags ))))
+                        )))
+                (else
+                    (error "No method for these types"
+                                (list op type-tags ))))
+        )))
+                                
 
-
-
-
+(define c1 (make-complex-from-real-imag 5 1))
+(define c2 (make-complex-from-real-imag 2 1))
+;(print (exp c1 c2)) 
+;*** ERROR: No method for these types (exp (complex complex))
 
