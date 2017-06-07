@@ -22,6 +22,11 @@
     (put 'exp '(scheme-number scheme-number)
         (lambda (x y) (tag (expt x y)))) 
 
+    ;;;;;;;;;;;;; Ex 2.83
+    (put 'raise '(scheme-number)
+        (lambda (make-rational scheme-number 1))
+    )
+
 
     (put 'make 'scheme-number (lambda (x) (tag x)))
 'done)
@@ -79,11 +84,53 @@
     (put '=zero? '(rational)
         (lambda (x) (= (numer x) 0)))
 
+    ;;;;;;;;;;;;; Ex 2.83
+    (put 'raise '(rational)
+        (lambda (make-real-number (/ (numer x) (denom y))))
+    )
+
+
     (put 'make 'rational
         (lambda (n d) (tag (make-rat n d))))
 'done)
 (define (make-rational n d)
     ((get 'make 'rational) n d))
+
+
+;; 実数 2.83
+(define (install-real-number-package)
+    (define (tag x) (attach-tag 'real-number x))
+    (put 'add '(real-number real-number)
+        (lambda (x y) (tag (+ x y))))
+    (put 'sub '(real-number real-number)
+        (lambda (x y) (tag (- x y))))
+    (put 'mul '(real-number real-number)
+        (lambda (x y) (tag (* x y))))
+    (put 'div '(real-number real-number)
+        (lambda (x y) (tag (/ x y))))
+
+    ;;;;;;;;;;;;; Ex 2.79
+    (put 'equ? '(real-number real-number) =)
+
+    ;;;;;;;;;;;;; Ex 2.80
+    (put '=zero? '(real-number)
+        (lambda (x) (= x 0)))
+    
+    ;;;;;;;;;;;;; Ex 2.81
+    (put 'exp '(real-number real-number)
+        (lambda (x y) (tag (expt x y)))) 
+
+    ;;;;;;;;;;;;; Ex 2.83
+    (put 'raise '(real-number)
+        (lambda (make-from-real-imag real-number 0))
+    )
+
+
+    (put 'make 'real-number (lambda (x) (tag x)))
+'done)
+
+(define (make-real-number n)
+    ((get 'make 'real-number) n))
 
 
 ;; 2.4.3より 複素数の各パッケージをinstall
@@ -135,6 +182,8 @@
     (put 'make-from-mag-ang 'polar
     (lambda (r a) (tag (make-from-mag-ang r a))))
 'done)
+
+
 
 
 ;; 複素数パッケージ
@@ -201,6 +250,8 @@
     ;(lambda (x) 
     ;    (= (magnitude x) 0)
 
+    ;;;;;;;;;;;;; Ex 2.83
+    (put 'raise '(complex) #f)
 
     (put 'make-from-real-imag 'complex
         (lambda (x y) (tag (make-from-real-imag x y))))
@@ -212,3 +263,12 @@
     ((get 'make-from-real-imag 'complex) x y))
 (define (make-complex-from-mag-ang r a)
     ((get 'make-from-mag-ang 'complex) r a))
+
+
+
+
+
+
+
+
+

@@ -201,12 +201,9 @@
 (print "---b")
 (define r1 (make-rational 2 3))
 (print (add s1 c1)) ;○ できる
-
-; 
+(print (add c1 c2)) ;○ できる
 
 (print "---c")
-
-
 (define (apply-generic op . args)
     (define (all el l)
         (cond
@@ -253,4 +250,88 @@
 (define c2 (make-complex-from-real-imag 2 1))
 ;(print (exp c1 c2)) 
 ;*** ERROR: No method for these types (exp (complex complex))
+
+(print "===Ex2.82===")
+(define (raise x) (apply-generic 'raise x))
+
+(define (apply-generic op . args)
+    (define (all el l)
+        (cond
+            ((null? l) #t)
+            ((not (pair? l)) #f)
+            ((eq? el (car l)) (all el (cdr l)))
+        (else #f)))
+
+    (define (any el l)
+        (cond 
+            ((null? l) #f)
+            ((eq? el (car l)) #t)
+        (else
+            (any el (cdr l)))
+        ))
+
+    (define (_raise target)
+        (lambda (x) 
+            (if 
+                (= (type-tag x) target)
+                (target)
+                (let 
+                    ((parent (raise target)))
+                    (if parent parent #f))
+           )
+        )
+    )
+
+
+    (define (apply-all list)
+        (let
+            ((f (_raise (car list))))
+            (let 
+                ((next (map f list)))
+                    (print "next:" next)
+                    (if
+                        next
+                        next
+                        (apply-all (cdr list))
+                    )
+            )))
+
+    (let ((type-tags (map type-tag args)))
+        (let ((proc (get op type-tags)))
+            (print "type: " type-tags)
+            #?=(cond 
+                (proc
+                    (apply proc (map contents args)))
+                ((all (car type-tags) type-tags) #f)
+                ((any #f type-tags) #f)
+                (else 
+                    (apply-generic op (apply-all args))
+                )
+                
+
+        )))
+)
+
+
+
+(print "===Ex2.83===")   
+;(print (add c1 s1))
+(print (add s2 s1)) ;7
+(print (add s1 r1)) ;7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
