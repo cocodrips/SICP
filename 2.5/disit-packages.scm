@@ -24,9 +24,13 @@
 
     ;;;;;;;;;;;;; Ex 2.83
     (put 'raise '(scheme-number)
-        (lambda (make-rational scheme-number 1))
+        (lambda (x) (make-rational x 1))
     )
 
+    ;;;;;;;;;;;;; Ex 2.84
+    (put 'raise '(scheme-number)
+        (lambda (x) (make-rational x 1))
+    )    
 
     (put 'make 'scheme-number (lambda (x) (tag x)))
 'done)
@@ -86,9 +90,8 @@
 
     ;;;;;;;;;;;;; Ex 2.83
     (put 'raise '(rational)
-        (lambda (make-real-number (/ (numer x) (denom y))))
+        (lambda (x) (make-real-number (/ (numer x) (denom x))))
     )
-
 
     (put 'make 'rational
         (lambda (n d) (tag (make-rat n d))))
@@ -122,11 +125,11 @@
 
     ;;;;;;;;;;;;; Ex 2.83
     (put 'raise '(real-number)
-        (lambda (make-from-real-imag real-number 0))
+        (lambda (x) (make-complex-from-real-imag x 0))
     )
 
-
     (put 'make 'real-number (lambda (x) (tag x)))
+
 'done)
 
 (define (make-real-number n)

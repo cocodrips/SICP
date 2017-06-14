@@ -275,9 +275,7 @@
             (if 
                 (= (type-tag x) target)
                 (target)
-                (let 
-                    ((parent (raise target)))
-                    (if parent parent #f))
+                (parent (raise target))
            )
         )
     )
@@ -288,7 +286,7 @@
             ((f (_raise (car list))))
             (let 
                 ((next (map f list)))
-                    (print "next:" next)
+                    ;(print "next:" next)
                     (if
                         next
                         next
@@ -298,8 +296,8 @@
 
     (let ((type-tags (map type-tag args)))
         (let ((proc (get op type-tags)))
-            (print "type: " type-tags)
-            #?=(cond 
+            ;(print "type: " type-tags " proc:" proc)
+            (cond 
                 (proc
                     (apply proc (map contents args)))
                 ((all (car type-tags) type-tags) #f)
@@ -315,20 +313,57 @@
 
 
 (print "===Ex2.83===")   
-;(print (add c1 s1))
-(print (add s2 s1)) ;7
-(print (add s1 r1)) ;7
+(install-real-number-package)
+(define rr1 (make-real-number 1))
+(print "real-number" rr1)
+
+(print "scheme-raise:" (raise s1))
+(print "rational-raise:" (raise r1))
+(print "real-raise:" (raise rr1))
+(print "complex-raise:" (raise c1))
+
+;real-number(real-number . 1)
+;scheme-raise:(rational 5 . 1)
+;rational-raise:(real-number . 2/3)
+;real-raise:(complex rectangular 1 . 0)
+;complex-raise:#f
+
+;; 2.82  
+;(print (add s2 s1)) ;7
+;(print (add s1 r1)) ;7
 
 
+(print "===Ex2.84===")   
+;練習問題 2.83の raise 演算を使って apply-generic⼿続きを修正して、
+;この節で検討した通り、連続して “上げる” という⽅法によって
+;引数が同じ型を持つよう強制型変換を⾏うようにせよ。
+;⼆つの型のどちらがタワーの中で⾼い位置にあるかをテストする⽅法を考える必要がある。
+;システムのほかの部分と “互換性がある” ようなやり⽅でこれを⾏い、
+;タワーに新しい階を追加する際に問題を引き起こさないようにせよ。
 
+(define (install-tree-depth-package)
+    (put 'tree-depth '(scheme-number)
+        (lambda (x) (+ 1 (tree-depth (raise x)))))
 
+    (put 'tree-depth '(rational)
+        (lambda (x) (+ 1 (tree-depth (raise x)))))
 
+    (put 'tree-depth '(real-number)
+        (lambda (x) (+ 1 (tree-depth (raise x)))))
 
+    (put 'tree-depth '(complex)
+        (lambda (x) 1))
+'done)
 
+; * apply-generic使うと、内部で再帰してしまう、、
+(define (tree-depth x)
+    ((get 'tree-depth (list (type-tag x))) x))
 
-
-
-
+(install-tree-depth-package)
+(print "complex tree-depth:" (tree-depth c1))
+(print "real    tree-depth:" (tree-depth rr1))
+(print "rational tree-depth:" (tree-depth r1))
+(print "scheme  tree-depth:" (tree-depth s1))
 
 
 
