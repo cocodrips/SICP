@@ -366,7 +366,69 @@
 (print "scheme  tree-depth:" (tree-depth s1))
 
 
+(define (debug-raise . args)
+    (define (min-type args)
+        (define (itr min-element lst)
+            (if (null? lst)
+                min-element
+                (let 
+                    (
+                        (head lst)
+                    )
+                    (if (< (tree-depth head) (tree-depth min-element))
+                        (itr (type-tag head) (cdr lst))
+                        (itr min-element (cdr lst)))
+                )))
+        (itr (car args) (cdr args)))
+    (print "depth-map: " (map tree-depth args))
+    (print "depth-disit-zip: " (map cons (map tree-depth args) args))
+    (print (min-type args))
 
+)
+(debug-raise c1 rr1 r1 s1)
+(print (min 1 2 3))
+
+;(define (apply-generic op . args)
+;    (define (all el l)
+;        (cond
+;            ((null? l) #t)
+;            ((not (pair? l)) #f)
+;            ((eq? el (car l)) (all el (cdr l)))
+;        (else #f)))
+
+;    (let ((type-tags (map type-tag args)))
+;        (let ((proc (get op type-tags)))
+;            (print "type: " type-tags (all (car type-tags) type-tags))
+;            (cond 
+;                (proc
+;                    (apply proc (map contents args)))
+;                ((all (car type-tags) type-tags)
+;                    (error "No method for these types" (list op type-tags)))
+;                (if (= (length args) 2)
+;                    (let 
+;                        (
+;                            (type1 (car type-tags))
+;                            (type2 (cadr type-tags))
+;                            (a1 (car args))
+;                            (a2 (cadr args))
+;                        )
+;                        (let 
+;                            (
+;                                (t1->t2 (get-coercion type1 type2))
+;                                (t2->t1 (get-coercion type2 type1))
+;                            )
+
+;                            (cond 
+;                                (t1->t2 (apply-generic op (t1->t2 a1) a2))
+;                                (t2->t1 (apply-generic op a1 (t2->t1 a2)))
+;                            (else (error "No method for these types"
+;                                (list op type-tags ))))
+;                        )))
+;                (else
+;                    (error "No method for these types"
+;                                (list op type-tags ))))
+;        )))
+                                
 
 
 
