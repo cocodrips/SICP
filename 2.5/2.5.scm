@@ -412,11 +412,13 @@
         (itr args)
     )
 
-    (print "depth-map: " (map tree-depth args))
-    (print "depth-disit-zip: " (map cons (map tree-depth args) args))
-    (print "min-type: "(min-type args))
-    (print "apply-raise: " (apply-raise args))
-    (print "apply-raise-to-min: " (apply-raise-to-min args))
+    (print "@depth-map: " (map tree-depth args))
+    (print "@depth-disit-zip: " (map cons (map tree-depth args) args))
+    (print "@min-type: "(min-type args))
+    (print "@apply-raise: " (apply-raise args))
+    (print "@apply-raise-to-min: " (apply-raise-to-min args))
+    (print "@raise args: " (map raise args))
+    (print "@any:" (any (lambda (x) (not x)) (map raise args)))
 )
 
 (debug-raise c1 rr1 r1 s1)
@@ -426,7 +428,9 @@
 ;apply-raise: ((complex rectangular 5 . 1) (complex rectangular 1 . 0) (real-number . 2/3) (rational 5 . 1))
 ;apply-raise-to-min: ((complex rectangular 5 . 1) (complex rectangular 1 . 0) (complex rectangular 2/3 . 0) (complex rectangular 5 . 0))
 
+
 (define (apply-generic op . args)
+    ;　全部リスト内がおんなじエレメント
     (define (all el l)
         (cond
             ((null? l) #t)
@@ -434,6 +438,7 @@
             ((eq? el (car l)) (all el (cdr l)))
         (else #f)))
 
+    ; リスト内でdepthの浅いtype
     (define (min-type args)
         (define (itr min-element lst)
             (if (null? lst)
@@ -448,6 +453,7 @@
                 )))
         (itr (car args) (cdr args)))
 
+    ; depthを1段階引き上げる
     (define (apply-raise list)
         (define (raise-to min-depth)
             (lambda (x)
@@ -459,45 +465,62 @@
             ((min-depth (tree-depth (car list))) )
             (map (raise-to min-depth) list)))
 
-    (let ((type-tags (map type-tag args)))
-        (let ((proc (get op type-tags)))
-            (print "type: " type-tags (all (car type-tags) type-tags))
+    (define (apply-raise-to-min args)
+        (define (itr l)
+            (if 
+                (all (tree-depth (car l)) (map tree-depth l))
+                l
+                (itr (apply-raise l)))
+            )
+        (itr args)
+    )
+    ;(print "---------------------------")
+    ;(print "op: " op " args:" args)
+    (let 
+        (
+            (type-tags (map type-tag args))
+        )
+        (let 
+            (
+                (proc (get op type-tags))
+            )
+            ;(print "type: " type-tags)
+            ;(print "same?: " (all (car type-tags) type-tags))
+            ;(print "proc:  " proc)
             (cond 
                 ; procがある状態
                 (proc
                     (apply proc (map contents args)))
 
                 ; procが無いが、全ての型が揃っている
-                ((all (car type-tags) type-tags)
-                    (error "No method for these types" (list op type-tags)))
+                ((all (car type-tags) type-tags) #f)
+                    ;(error "No method for these types" (list op type-tags)))
 
-
-
-                (if (= (length args) 2)
+                (else
                     (let 
                         (
-                            (type1 (car type-tags))
-                            (type2 (cadr type-tags))
-                            (a1 (car args))
-                            (a2 (cadr args))
+                            (raised (apply-raise-to-min args))
                         )
-                        (let 
-                            (
-                                (t1->t2 (get-coercion type1 type2))
-                                (t2->t1 (get-coercion type2 type1))
-                            )
-
-                            (cond 
-                                (t1->t2 (apply-generic op (t1->t2 a1) a2))
-                                (t2->t1 (apply-generic op a1 (t2->t1 a2)))
-                            (else (error "No method for these types"
-                                (list op type-tags ))))
-                        )))
-                (else
-                    (error "No method for these types"
-                                (list op type-tags ))))
-        )))
+                        (
+                            ;(print "raised:" raised)
+                            (apply-generic op raised)
+                        )
+                    )
+                    
+                ))
+        ))
+)
                                 
+(print "complex + complex = " (add c1 c1))
+(print "complex + rational = " (add c1 r1))
 
 
+;op: add args:(((complex rectangular 5 . 1) (complex rectangular 2/3 . 0)))
+;type: ((complex rectangular 5 . 1))
+;same?: #t
+;proc:  #f
+;raised:((complex rectangular 5 . 1) (complex rectangular 2/3 . 0))
+;*** ERROR: invalid application: (#<undef> #f)
+;    While loading "./2.5.scm" at line 515
+;Stack Trace:
 
