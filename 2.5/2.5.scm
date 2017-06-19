@@ -367,67 +367,136 @@
 
 
 (define (debug-raise . args)
+    ;　全部リスト内がおんなじエレメント
+    (define (all el l)
+        (cond
+            ((null? l) #t)
+            ((not (pair? l)) #f)
+            ((eq? el (car l)) (all el (cdr l)))
+        (else #f)))
+
+    ; リスト内でdepthの浅いtype
     (define (min-type args)
         (define (itr min-element lst)
             (if (null? lst)
                 min-element
                 (let 
                     (
-                        (head lst)
+                        (head (car lst))
                     )
                     (if (< (tree-depth head) (tree-depth min-element))
                         (itr (type-tag head) (cdr lst))
                         (itr min-element (cdr lst)))
                 )))
         (itr (car args) (cdr args)))
+
+    ; depthを1段階引き上げる
+    (define (apply-raise list)
+        (define (raise-to min-depth)
+            (lambda (x)
+                (if (= min-depth (tree-depth x))
+                    x
+                    (raise x)
+                )))
+        (let
+            ((min-depth (tree-depth (car list))) )
+            (map (raise-to min-depth) list)))
+
+    (define (apply-raise-to-min args)
+        (define (itr l)
+            (if 
+                (all (tree-depth (car l)) (map tree-depth l))
+                l
+                (itr (apply-raise l)))
+            )
+        (itr args)
+    )
+
     (print "depth-map: " (map tree-depth args))
     (print "depth-disit-zip: " (map cons (map tree-depth args) args))
-    (print (min-type args))
-
+    (print "min-type: "(min-type args))
+    (print "apply-raise: " (apply-raise args))
+    (print "apply-raise-to-min: " (apply-raise-to-min args))
 )
+
 (debug-raise c1 rr1 r1 s1)
-(print (min 1 2 3))
+;depth-map: (1 2 3 4)
+;depth-disit-zip: ((1 complex rectangular 5 . 1) (2 real-number . 1) (3 rational 2 . 3) (4 . 5))
+;min-type: (complex rectangular 5 . 1)
+;apply-raise: ((complex rectangular 5 . 1) (complex rectangular 1 . 0) (real-number . 2/3) (rational 5 . 1))
+;apply-raise-to-min: ((complex rectangular 5 . 1) (complex rectangular 1 . 0) (complex rectangular 2/3 . 0) (complex rectangular 5 . 0))
 
-;(define (apply-generic op . args)
-;    (define (all el l)
-;        (cond
-;            ((null? l) #t)
-;            ((not (pair? l)) #f)
-;            ((eq? el (car l)) (all el (cdr l)))
-;        (else #f)))
+(define (apply-generic op . args)
+    (define (all el l)
+        (cond
+            ((null? l) #t)
+            ((not (pair? l)) #f)
+            ((eq? el (car l)) (all el (cdr l)))
+        (else #f)))
 
-;    (let ((type-tags (map type-tag args)))
-;        (let ((proc (get op type-tags)))
-;            (print "type: " type-tags (all (car type-tags) type-tags))
-;            (cond 
-;                (proc
-;                    (apply proc (map contents args)))
-;                ((all (car type-tags) type-tags)
-;                    (error "No method for these types" (list op type-tags)))
-;                (if (= (length args) 2)
-;                    (let 
-;                        (
-;                            (type1 (car type-tags))
-;                            (type2 (cadr type-tags))
-;                            (a1 (car args))
-;                            (a2 (cadr args))
-;                        )
-;                        (let 
-;                            (
-;                                (t1->t2 (get-coercion type1 type2))
-;                                (t2->t1 (get-coercion type2 type1))
-;                            )
+    (define (min-type args)
+        (define (itr min-element lst)
+            (if (null? lst)
+                min-element
+                (let 
+                    (
+                        (head (car lst))
+                    )
+                    (if (< (tree-depth head) (tree-depth min-element))
+                        (itr (type-tag head) (cdr lst))
+                        (itr min-element (cdr lst)))
+                )))
+        (itr (car args) (cdr args)))
 
-;                            (cond 
-;                                (t1->t2 (apply-generic op (t1->t2 a1) a2))
-;                                (t2->t1 (apply-generic op a1 (t2->t1 a2)))
-;                            (else (error "No method for these types"
-;                                (list op type-tags ))))
-;                        )))
-;                (else
-;                    (error "No method for these types"
-;                                (list op type-tags ))))
-;        )))
+    (define (apply-raise list)
+        (define (raise-to min-depth)
+            (lambda (x)
+                (if (= min-depth (tree-depth x))
+                    x
+                    (raise x)
+                )))
+        (let
+            ((min-depth (tree-depth (car list))) )
+            (map (raise-to min-depth) list)))
+
+    (let ((type-tags (map type-tag args)))
+        (let ((proc (get op type-tags)))
+            (print "type: " type-tags (all (car type-tags) type-tags))
+            (cond 
+                ; procがある状態
+                (proc
+                    (apply proc (map contents args)))
+
+                ; procが無いが、全ての型が揃っている
+                ((all (car type-tags) type-tags)
+                    (error "No method for these types" (list op type-tags)))
+
+
+
+                (if (= (length args) 2)
+                    (let 
+                        (
+                            (type1 (car type-tags))
+                            (type2 (cadr type-tags))
+                            (a1 (car args))
+                            (a2 (cadr args))
+                        )
+                        (let 
+                            (
+                                (t1->t2 (get-coercion type1 type2))
+                                (t2->t1 (get-coercion type2 type1))
+                            )
+
+                            (cond 
+                                (t1->t2 (apply-generic op (t1->t2 a1) a2))
+                                (t2->t1 (apply-generic op a1 (t2->t1 a2)))
+                            (else (error "No method for these types"
+                                (list op type-tags ))))
+                        )))
+                (else
+                    (error "No method for these types"
+                                (list op type-tags ))))
+        )))
                                 
 
 
