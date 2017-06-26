@@ -412,6 +412,7 @@
         (itr args)
     )
 
+
     (print "@depth-map: " (map tree-depth args))
     (print "@depth-disit-zip: " (map cons (map tree-depth args) args))
     (print "@min-type: "(min-type args))
@@ -476,6 +477,7 @@
     )
     ;(print "---------------------------")
     ;(print "op: " op " args:" args)
+
     (let 
         (
             (type-tags (map type-tag args))
@@ -501,10 +503,8 @@
                         (
                             (raised (apply-raise-to-min args))
                         )
-                        (
-                            ;(print "raised:" raised)
-                            (apply-generic op raised)
-                        )
+                        ;(print "raised:" raised)
+                        (apply apply-generic (cons op raised))
                     )
                     
                 ))
@@ -513,14 +513,58 @@
                                 
 (print "complex + complex = " (add c1 c1))
 (print "complex + rational = " (add c1 r1))
+;complex + complex = (complex rectangular 10 . 2)
+;complex + rational = (complex rectangular 17/3 . 1)
 
 
-;op: add args:(((complex rectangular 5 . 1) (complex rectangular 2/3 . 0)))
-;type: ((complex rectangular 5 . 1))
-;same?: #t
-;proc:  #f
-;raised:((complex rectangular 5 . 1) (complex rectangular 2/3 . 0))
-;*** ERROR: invalid application: (#<undef> #f)
-;    While loading "./2.5.scm" at line 515
-;Stack Trace:
+
+(print "===2.85===")
+(define (install-project)
+    (put 'project '(scheme-number)
+        (lambda (x) x)) ;to scheme-number もしくは false?
+
+    ; rational -> scheme
+    (put 'project '(rational)
+        (lambda (x) (make-scheme-number (floor (/ (car x) (cdr x))))))
+
+    (put 'project '(real-number)
+        (lambda (x) (make-rational x 1)))
+
+    (put 'project '(complex)
+        (lambda (x) (make-real-number (real-part x))))
+'done)
+(define (project x) (apply-generic 'project x))
+
+
+(install-project)
+(print "project complex: "  c1  " -> "  (project c1))
+(print "project real: "     rr1 " -> "  (project rr1))
+(print "project rational: " r1  " -> "  (project r1))
+(print "project scheme: "   s1  " -> "  (project s1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
