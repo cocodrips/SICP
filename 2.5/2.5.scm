@@ -929,9 +929,26 @@
 )
 (ex-2-89)
 
+(print "===Ex 2.90===")
 
+(load "./poly2.scm")
 
+(install-sparse-polynomial-package)
+(install-dense-polynomial-package)
+(install-polynomial-package)
 
+(define (ex-2-90)
+    ;(x**2) + 2x + 1
+    ;(define dense-p (make-dense-poly 'x (list 1 2 1)))
+    (define sparse-p 
+        (make-sparse-poly 'x (list (list 2 1) (list 1 2) (list 0 1))))    
+    ;(print "dence x^2 + 2x + 1 = " dense-p)
+    ;(print "sparse x^2 + 2x + 1 = " sparse-p)
+    (print "get make-sparse-poly:" make-sparse-poly)
+    (print "get make-dense-poly:" make-dense-poly)
+
+)
+(ex-2-90)
 
 
 
