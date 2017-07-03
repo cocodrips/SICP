@@ -647,7 +647,7 @@
             (variable p) 
             (map list
                 (map order (term-list p))
-                (map (lambda (x) (* -1 (coeff x))) (term-list p))))
+                (map (lambda (x) (mul -1 (coeff x))) (term-list p))))
     )
 
     ;; システムのほかの部分とのインターフェイス
@@ -658,9 +658,6 @@
     (put 'sub '(polynomial polynomial) 
         (lambda (p1 p2) (tag (add-poly p1 (negative p2)))))
 
-    ;(put 'sub '(polynomial polynomial) 
-    ;    (lambda (p1 p2) (negative p2)))
-
     (put 'mul '(polynomial polynomial)
         (lambda (p1 p2) (tag (mul-poly p1 p2))))
     
@@ -668,6 +665,8 @@
 
     (put 'make 'polynomial
         (lambda (var terms) (tag (make-poly var terms))))
+
+
 'done)
 
 (define (make-polynomial var terms)
@@ -676,15 +675,15 @@
 
 (install-polynomial-package)
 
-(define (apply-generic op . args)
-    (let 
-        ((type-tags (map type-tag args)))
-            (let ((proc (get op type-tags)))
-                (if proc
-                    (apply proc (map contents args))
-                (error
-                    "No method for these types: APPLY-GENERIC"
-                    (list op type-tags ))))))
+;(define (apply-generic op . args)
+;    (let 
+;        ((type-tags (map type-tag args)))
+;            (let ((proc (get op type-tags)))
+;                (if proc
+;                    (apply proc (map contents args))
+;                (error
+;                    "No method for these types: APPLY-GENERIC"
+;                    (list op type-tags ))))))
 
 
 
@@ -708,6 +707,7 @@
     (print "p1: 2x ** 2 = " p1)
     (print "p2: 0 = " p2)
     (print "p3: 0x + 0 = " p3)
+    (print "mix0: 3/2x**5 + 0 = " p3)
 
     (print (contents p0))
     (print (map car (cdr (contents p0))))
@@ -715,6 +715,8 @@
     (print (=zero? p1))
     (print (=zero? p2))
     (print (=zero? p3))
+
+    (print "p0 * p1 = " (mul p0 p1))
 
     ;p0: 2x + 1 = (polynomial x (1 2) (0 1))
     ;p1: 2x ** 2 = (polynomial x (2 2))
@@ -726,21 +728,29 @@
     ;#f
     ;#t
     ;#t
-
 )
 (ex-2-87)
 
 
-
 (print "===Ex2.88===")
-(define (ex-2-87)
+
+(define r1 (make-rational 2 3))
+(define c1 (make-complex-from-real-imag 1 5))
+(define p4 (make-polynomial 'x (list (list 1 r1))))
+(define p5 (make-polynomial 'x (list (list 1 c1))))
+(define (ex-2-88)
     (print "p0: 2x + 1 = " p0)
     (print "p1: 2x ** 2 = " p1)
     (print "p2: 0 = " p2)
     (print "p3: 0x + 0 = " p3)
+    (print "p4" p4)
+    (print "p5" p5) 
 
     (print "p0 + p1 = " (add p0 p1))
     (print "p0 - p1 = " (sub p0 p1))
+    ; 本当はこれも通るように
+    ; apply-generic が未完成なので通らない
+    ;(print "p4 - p5 = " (sub p4 p5)) 
 
     ;p0: 2x + 1 = (polynomial x (1 2) (0 1))
     ;p1: 2x ** 2 = (polynomial x (2 2))
@@ -749,7 +759,7 @@
     ;p0 + p1 = (polynomial x (2 2) (1 2) (0 1))
     ;p0 - p1 = (polynomial x (2 -2) (1 2) (0 1))
 )
-(ex-2-87)
+(ex-2-88)
 
 
 (print "===Ex2.89===")
@@ -820,10 +830,19 @@
 
     (define (add-poly p1 p2) 
         (if 
-            #?=(same-variable? (variable p1) (variable p2))
-            (make-poly (variable p1)
-                (map + (coeff-list p1) (coeff-list p2)))) ;<== mapの長さ揃うやつさがす
-            (error "Polys not in same var: ADD-POLY" (list p1 p2) (coeff-list p1) (coeff-list p2)))
+            (same-variable? (variable p1) (variable p2))
+            (let 
+                (
+                    (max-len (- (max (length p1) (length p2)) 1))
+                )
+                (make-poly (variable p1)
+                    (map 
+                        + 
+                        (take* (coeff-list p1) max-len #t 0)
+                        (take* (coeff-list p2) max-len #t 0))) ;<== mapの長さ揃うやつさがす
+
+            )
+            (error "Polys not in same var: ADD-POLY" (list p1 p2))))
 
     ;(define (mul-poly p1 p2)
     ;    (if 
@@ -895,6 +914,9 @@
     (print "p2: 0 = " p2)
     (print "p3: 0x + 0 = " p3)
 
+    (print (take* '(1 2 3) 5 #t 0))
+    (print (max 3 4))
+
     (print "p0 + p1 = " (add p0 p1))
     (print "p0 - p1 = " (sub p0 p1))
 
@@ -905,7 +927,42 @@
     ;p0 + p1 = (polynomial x (2 2) (1 2) (0 1))
     ;p0 - p1 = (polynomial x (2 -2) (1 2) (0 1))
 )
-(ex-2-87)
+(ex-2-89)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
