@@ -939,18 +939,33 @@
 
 (define (ex-2-90)
     ;(x**2) + 2x + 1
-    ;(define dense-p (make-dense-poly 'x (list 1 2 1)))
+    (define dense-p (make-dense-poly 'x (list 1 2 1)))
     (define sparse-p 
-        (make-sparse-poly 'x (list (list 2 1) (list 1 2) (list 0 1))))    
-    ;(print "dence x^2 + 2x + 1 = " dense-p)
-    ;(print "sparse x^2 + 2x + 1 = " sparse-p)
-    (print "get make-sparse-poly:" make-sparse-poly)
-    (print "get make-dense-poly:" make-dense-poly)
+        (make-sparse-poly 'x (list (list 2 1) (list 1 2) (list 0 1))))
+
+    ;; make
+    (print "dense x^2 + 2x + 1 = \t" dense-p)
+    (print "sparse x^2 + 2x + 1 = \t" sparse-p)
+
+    ; type
+    (print "type(dense): \t" (type-tag dense-p))
+    (print "type(sparse): \t" (type-tag sparse-p))
+
+    ; variable
+    ;(print "variable(dense):" ((get 'variable (type-tag dense-p) dense-p)))
+
+    ; term=list
+    ;(print "term-list(dense):" ((get 'term-list 'polynomial-dense) dense-p))
+    (print "term-list(dense):" (get 'term-list '(polynomial-dense)) dense-p)
+    ;(print "term-list(sparse):" ((get 'term-list 'polynomial-sparse) sparse-p))
 
 )
 (ex-2-90)
 
-
+(print "===complex===")
+(define c1 (make-complex-from-mag-ang 1 2))
+(print ((get 'real-part '(complex)) c1))
+(print (type-tag c1))
 
 
 

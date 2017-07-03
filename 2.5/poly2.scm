@@ -98,24 +98,24 @@
 
     ;;; システムのほかの部分とのインターフェイス
     (define (tag p) (attach-tag 'polynomial-sparse p))
-    ;(put 'add '(polynomial polynomial)
+    ;(put 'add '(polynomial-sparse polynomial-sparse)
     ;    (lambda (p1 p2) (tag (add-poly p1 p2))))
 
-    ;(put 'sub '(polynomial polynomial) 
+    ;(put 'sub '(polynomial-sparse polynomial-sparse) 
     ;    (lambda (p1 p2) (tag (add-poly p1 (negative p2)))))
 
-    ;(put 'mul '(polynomial polynomial)
+    ;(put 'mul '(polynomial-sparse polynomial-sparse)
     ;    (lambda (p1 p2) (tag (mul-poly p1 p2))))
     
-    ;(put '=zero? '(polynomial) =zero-poly?)
+    ;(put '=zero? '(polynomial-sparse) =zero-poly?)
 
     (put 'make 'polynomial-sparse
         (lambda (var terms) (tag (make-poly var terms))))
 
-    (put 'variable '(polynomial-sparse) variable)
+    ;(put 'variable '(polynomial-sparse) variable)
     (put 'term-list '(polynomial-sparse) term-list)
-    (put 'variavle? '(polynomial-sparse) variable?)
-    (put 'same-variavle? '(polynomial-sparse polynomial-sparse) same-variable?)
+    ;(put 'variavle? '(polynomial-sparse) variable?)
+    ;(put 'same-variavle? '(polynomial-sparse polynomial-sparse) same-variable?)
 
 'done)
 
@@ -126,6 +126,14 @@
     (define (make-poly variable coeff-list) (cons variable coeff-list))
     (define (variable p) (car p))
     (define (coeff-list p) (cdr p))
+    (define (term-list p) 
+        (define (expantion i lst dst)
+            (if 
+                (null? lst)
+                dst
+                (expantion (+ i 1) (cdr lst) (cons (list i (car lst)) dst)
+            ))
+        (expantion 0 (cdr p) '())))
 
     ;⟨2.3.2 節の same-variable? と variable? ⼿続き⟩
     (define (variable? x) (symbol? x))
@@ -201,14 +209,14 @@
     ;        )
     ;        (error "Polys not in same var: ADD-POLY" (list p1 p2))))
 
-    ;;(define (mul-poly p1 p2)
-    ;;    (if 
-    ;;        (same-variable? (variable p1) (variable p2))
-    ;;        (make-poly (variable p1)
-    ;;            (mul-terms (term-list p1) (term-list p2)))
-    ;;        (error "Polys not in same var: MUL-POLY" (list p1 p2))))
+    ;(define (mul-poly p1 p2)
+    ;    (if 
+    ;        (same-variable? (variable p1) (variable p2))
+    ;        (make-poly (variable p1)
+    ;            (mul-terms (term-list p1) (term-list p2)))
+    ;        (error "Polys not in same var: MUL-POLY" (list p1 p2))))
 
-    ;; Ex 2.87
+    ; Ex 2.87
     ;(define (=zero-poly? p) 
     ;    (= 0 (fold-left + 0 (map coeff (term-list p))))
     ;)
@@ -236,10 +244,11 @@
 
     (put 'make 'polynomial-dense
         (lambda (var terms) (tag (make-poly var terms))))
-    (put 'variable '(polynomial-dense) variable)
-    (put 'coeff-list '(polynomial-dense) coeff-list)
-    (put 'variavle? '(polynomial-dense) variable?)
-    (put 'same-variavle? '(polynomial-dense polynomial-dense) same-variable?)
+    ;(put 'variable '(polynomial-dense) variable)
+    ;(put 'coeff-list '(polynomial-dense) coeff-list)
+    (put 'term-list '(polynomial-dense) term-list)
+    ;(put 'variavle? 'polynomial-dense variable?)
+    ;(put 'same-variavle? '(polynomial-dense polynomial-dense) same-variable?)
 
 'done)
 
@@ -256,6 +265,9 @@
 	;(install-sparse-polynomial-package)
 	;(install-dense-polynomial-package)
 
+    ;
+    ;(put 'term-list '(polynomial) term-list)
+
     (put 'make-sparse-poly 'polynomial
     	(lambda (variable term-list) 
     		(tag (make-sparse-poly variable term-list))))
@@ -263,11 +275,8 @@
     (put 'make-dense-poly 'polynomial
     	(lambda (variable coeff-list) 
     		(tag (make-dense-poly variable coeff-list))))
-    (put 'test 'polynomial
-    	(lambda (x) x))
 
     (print "--\tinstalled polynomial package")
-    (print make-sparse-poly)
 
 'done)
 
