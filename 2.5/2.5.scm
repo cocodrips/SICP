@@ -951,29 +951,15 @@
     (print "type(dense): \t" (type-tag dense-p))
     (print "type(sparse): \t" (type-tag sparse-p))
 
-    ; variable
-    ;(print "variable(dense):" ((get 'variable (type-tag dense-p) dense-p)))
+    (print "term-list(sparse): " (term-list dense-p))
+    (print "term-list(sparse): " (term-list sparse-p))
 
-    ; term=list
-    ;(print "term-list(dense):" ((get 'term-list 'polynomial-dense) dense-p))
-    (print "term-list(dense):" (get 'term-list '(polynomial-dense)) dense-p)
-    ;(print "term-list(sparse):" ((get 'term-list 'polynomial-sparse) sparse-p))
-
+    ; Add
+    (print "add sparse + sparse = " (add sparse-p sparse-p))
 )
 (ex-2-90)
 
 (print "===complex===")
-(define c1 (make-complex-from-mag-ang 1 2))
-(print ((get 'real-part '(complex)) c1))
-(print (type-tag c1))
-
-
-
-
-
-
-
-
 
 
 
