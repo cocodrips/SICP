@@ -20,7 +20,8 @@
     ;        (=zero? (coeff term))
     ;        term-list
     ;        (cons term term-list)))
-    ;(define (the-empty-termlist) '())
+    (define (the-empty-termlist) '())
+    (define (empty-termlist? term-list) (null? term-list))
     ;(define (first-term term-list) (car term-list))
     ;(define (rest-terms term-list) (cdr term-list))
 
@@ -117,11 +118,13 @@
     (put 'make 'polynomial-sparse
         (lambda (var terms) (tag (make-poly var terms))))
 
-    ;(put 'variable '(polynomial-sparse) variable)
+    (put 'variable '(polynomial-sparse) variable)
     (put 'term-list '(polynomial-sparse) term-list)
     (put 'make-poly '(polynomial-sparse) make-poly)
+    (put 'empty-termlist? '(polynomial-sparse) empty-termlist?)
+
     ;(put 'variavle? '(polynomial-sparse) variable?)
-    ;(put 'same-variavle? '(polynomial-sparse polynomial-sparse) same-variable?)
+    (put 'same-variavle? '(polynomial-sparse polynomial-sparse) same-variable?)
 
 'done)
 
@@ -140,7 +143,7 @@
         (cons variable coeff-list))
 
 
-    ;(define (variable p) (car p))
+    (define (variable p) (car p))
     ;(define (coeff-list p) (cdr p))
     (define (term-list p) 
         (define (expantion i lst dst)
@@ -262,9 +265,11 @@
 
     (put 'make 'polynomial-dense
         (lambda (var terms) (tag (make-poly var terms))))
-    ;(put 'variable '(polynomial-dense) variable)
+    (put 'variable '(polynomial-dense) variable)
     ;(put 'coeff-list '(polynomial-dense) coeff-list)
     (put 'term-list '(polynomial-dense) term-list)
+    (put 'empty-termlist? '(polynomial-dense) empty-termlist?)
+
     (put 'make-poly '(polynomial-dense) make-poly)
     ;(put 'variavle? 'polynomial-dense variable?)
     ;(put 'same-variavle? '(polynomial-dense polynomial-dense) same-variable?)
@@ -279,10 +284,7 @@
     	((get 'make 'polynomial-dense) variable coeff-list))
 
 	(define (tag z) (attach-tag 'polynomial z))
-
-    (define (variable p)
-        (lambda (p) ((get 'variable (type-tag p)) p)))
-    (define (variable? x) (symbol? x))
+    ;(define (variable? x) (symbol? x))
 
     (define (same-variable? v1 v2)
         (and 
@@ -323,14 +325,24 @@
         )))
 
     (define (add-poly p1 p2) 
+        (print "variable:" p1 p2)
+        (print "variable:" (variable p1) (variable p2))
         (if 
             (same-variable? (variable p1) (variable p2))
             (make-poly (variable p1)
                 (add-terms (term-list p1) (term-list p2)))
 
-            (error "Polys not in same var: ADD-POLY" (list p1 p2))))
+            (error "Polys not in same var: ADD-POLY" (list p1 p2)))
+    )
+
+    (put 'add '(polynomial polynomial) 
+        (lambda (p1 p2) 
+            (tag (add-poly p1 p2)))
+    )
 
     (put 'term-list '(polynomial) term-list)
+    (put 'empty-termlist? '(polynomial) empty-termlist?)
+    (put 'variable '(polynomial) variable)
 
     (put 'make-sparse-poly 'polynomial
     	(lambda (variable term-list) 
@@ -367,7 +379,14 @@
 (define (make-poly p)
     (apply-generic 'make-poly p))
 
+(define (variable p)
+    (apply-generic 'variable p))
+
+(define (empty-termlist? p)
+    (apply-generic 'empty-termlist? p))
+
 (define (test p)
     ((get 'test 'polynomial) p))
 
 (print "--\tloaded poly2 package!")
+
