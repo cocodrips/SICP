@@ -216,6 +216,8 @@
             (- (angle z1) (angle z2))))
     ;; システムのほかの部分とのインターフェイス
     (define (tag z) (attach-tag 'complex z))
+
+    (print "::real-parts" real-part)
     (put 'add '(complex complex)
         (lambda (z1 z2) (tag (add-complex z1 z2))))
     (put 'sub '(complex complex)
@@ -266,6 +268,22 @@
     ((get 'make-from-real-imag 'complex) x y))
 (define (make-complex-from-mag-ang r a)
     ((get 'make-from-mag-ang 'complex) r a))
+
+
+(define (term-list x) (apply-generic 'term-list x))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

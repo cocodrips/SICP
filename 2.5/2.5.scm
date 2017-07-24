@@ -936,54 +936,70 @@
 (install-sparse-polynomial-package)
 (install-dense-polynomial-package)
 (install-polynomial-package)
+; 挫折。。
+;(define (ex-2-90)
+;    ;(x**2) + 2x + 1
+;    (define dense-p (make-dense-poly 'x (list 1 2 1)))
+;    (define sparse-p 
+;        (make-sparse-poly 'x (list (list 2 1) (list 1 2) (list 0 1))))
 
+;    ;; make
+;    (print "dense x^2 + 2x + 1 = \t" dense-p)
+;    (print "sparse x^2 + 2x + 1 = \t" sparse-p)
+
+;    ; type
+;    (print "type(dense): \t" (type-tag dense-p))
+;    (print "type(sparse): \t" (type-tag sparse-p))
+
+;    (print "term-list(dense): " (term-list dense-p))
+;    (print "term-list(sparse): " (term-list sparse-p))
+
+;    ; Add
+;    (print "add sparse + sparse = " (add sparse-p sparse-p))
+;)
+;(ex-2-90)
+
+
+(print "===2.90 写経===")
+(load "./poly3.scm")
 (define (ex-2-90)
     ;(x**2) + 2x + 1
-    (define dense-p (make-dense-poly 'x (list 1 2 1)))
+
     (define sparse-p 
-        (make-sparse-poly 'x (list (list 2 1) (list 1 2) (list 0 1))))
+        (make-polynomial 'x (make-dense-term '(1 -1)) ))
+    (define dense-p (make-polynomial 'x (make-sparse-term '((1 2) (0 1)))))
+    (print "sparse x - 1: " sparse-p)
+    (print "dense 2x + 1: " dense-p)
+    (print "Add dense + dense = 4x + 2: " (add dense-p dense-p))
+    (print "Add sparse + sparse = 2x - 2: " (add sparse-p sparse-p))
+    (print "Add sparse + dense = 3x: " (add sparse-p dense-p))
 
-    ;; make
-    (print "dense x^2 + 2x + 1 = \t" dense-p)
-    (print "sparse x^2 + 2x + 1 = \t" sparse-p)
-
-    ; type
-    (print "type(dense): \t" (type-tag dense-p))
-    (print "type(sparse): \t" (type-tag sparse-p))
-
-    ; variable
-    ;(print "variable(dense):" ((get 'variable (type-tag dense-p) dense-p)))
-
-    ; term=list
-    ;(print "term-list(dense):" ((get 'term-list 'polynomial-dense) dense-p))
-    (print "term-list(dense):" (get 'term-list '(polynomial-dense)) dense-p)
-    ;(print "term-list(sparse):" ((get 'term-list 'polynomial-sparse) sparse-p))
-
+    (print "Mul dense * dense = 4x^2 + 4x + 1: " (mul dense-p dense-p))
+    (print "Mul sparse * sparse = x^2 -2x + 1: " (mul sparse-p sparse-p))
+    (print "Mul sparse * dense = 2x^2 - x - 1: " (mul sparse-p dense-p))
+    (print "Negete" (sub sparse-p sparse-p))
+    ;(print "Sub sparse - sparse = x^2 -2x + 1: " (sub sparse-p sparse-p))
 )
+
 (ex-2-90)
 
-(print "===complex===")
-(define c1 (make-complex-from-mag-ang 1 2))
-(print ((get 'real-part '(complex)) c1))
-(print (type-tag c1))
 
+(print "===Ex 2.91===")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+;(define (div-terms L1 L2)
+;(if (empty-termlist? L1)
+;(list (the-empty-termlist) (the-empty-termlist))
+;(let ((t1 (first-term L1))
+;(t2 (first-term L2)))
+;(if (> (order t2) (order t1))
+;(list (the-empty-termlist) L1)
+;(let ((new-c (div (coeff t1) (coeff t2)))
+;(new-o (- (order t1) (order t2))))
+;(let ((rest-of-result
+;⟨ 再帰的に残りを計算する⟩
+;))
+;⟨ 完全な結果を作る⟩
+;))))))
 
 
 
