@@ -52,6 +52,10 @@
   (print "==== answer " 3.1415)
   (print "100回: " (estimate-integral pi-test -1 1 -1 1 100))
   (print "10000回: " (estimate-integral pi-test -1 1 -1 1 10000))
+  (print "100000回: " (estimate-integral pi-test -1 1 -1 1 100000))
+  (print "1000000回: " (estimate-integral pi-test -1 1 -1 1 1000000))
 )
+
+
 
 (ex-3.5)
