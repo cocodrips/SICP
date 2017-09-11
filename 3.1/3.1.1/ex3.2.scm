@@ -24,10 +24,11 @@
       (apply f args)
     ))
   (define (how-many-calls?) counter)
+  (define (reset-count) (set! counter 0))
   (define (dispatch . args)
-    (print (car args))
     (cond 
-      ((eq? (car args) 'how-many-calls?) how-many-calls?)
+      ((eq? (car args) 'how-many-calls?) (how-many-calls?))
+      ((eq? (car args) 'reset-count) (reset-count))
     (else 
       (call args)
   )))
@@ -38,12 +39,27 @@ dispatch)
   (define m (make-monitored sqrt))
   (define m2 (make-monitored +))
   (print "== Ex 3.2")
+  (print "- sqrt" )
   (print "sqrt 100 = " (m 100))
+  (print "how-many-calls = " (m 'how-many-calls? 100))
+  (print "sqrt 25 = " (m 25))
+  (print "how-many-calls = " (m 'how-many-calls? 100))
+  (print "reset-count" (m 'reset-count))
+  (print "sqrt 25 = " (m 25))
+  (print "how-many-calls = " (m 'how-many-calls? 100))
+
+  (print "- add" )     
   (print "+ 100 10 = " (m2 100 10))
 ;== Ex 3.2
-;100
+;- sqrt
 ;sqrt 100 = 10
-;100
+;how-many-calls = 1
+;sqrt 25 = 5
+;how-many-calls = 2
+;reset-count0
+;sqrt 25 = 5
+;how-many-calls = 1
+;- add
 ;+ 100 10 = 110
 )
 (ex-3.2)

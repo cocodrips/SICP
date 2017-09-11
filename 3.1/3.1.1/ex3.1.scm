@@ -22,14 +22,28 @@
   )
 )
 
+(define (make-accumulator2 value)
+    (lambda (v)
+      (begin 
+        (set! value (+ v value))
+        value
+      )
+    )
+)
+
 (define (ex-3.1)
   (define A (make-accumulator 5))
+  (define A2 (make-accumulator2 5))
   (print "== Ex 3.1")
   (print (A 10))
   (print (A 10))
 ;== Ex 3.1
 ;15
 ;25
+  (print "== Ex 3.1")
+  (print (A2 10))
+  (print (A2 10))
+
 )
 
 (ex-3.1)
